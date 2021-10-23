@@ -25,10 +25,16 @@ jobs:
         with:
           dotnet-version:  ${{ env.DOTNET_VERSION }}
 
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
+      - name: Restore dependencies 🛠
+        run: dotnet restore
 
-      - name: dotnet publish
+      - name: Build app 🚀
+        run: dotnet build --configuration Release --no-restore
+
+#      - name: Run automated tests 🧪
+#        run: dotnet test -c Release --no-build
+
+      - name: Publish app 📰
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
