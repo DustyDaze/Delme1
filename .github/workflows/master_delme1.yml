@@ -11,6 +11,8 @@ on:
 
 env:
   DOTNET_VERSION: '5.0.x'
+  AZURE_WEBAPP_NAME: Delme1
+
 
 jobs:
   build:
@@ -34,10 +36,10 @@ jobs:
       - name: Run automated tests 🧪
         run: dotnet test -c Release --no-build
 
-      - name: Publish app 📰
+      - name: Publish (aka package) app 📰
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
-      - name: Upload artifact for deployment job
+      - name: Upload artifact for deployment job 🏗
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
@@ -51,16 +53,16 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Download artifact from build job
+      - name: Download artifact from build job 🏗
         uses: actions/download-artifact@v2
         with:
           name: .net-app
 
-      - name: Deploy to Azure Web App
+      - name: Deploy to Azure Web Apps using publish profile credentials 🚢
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'Delme1'
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E3E20A8D72544865AD5E061EA57BEB59 }}
           package: .
