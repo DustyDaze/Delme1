@@ -31,8 +31,8 @@ jobs:
       - name: Build app 🚀
         run: dotnet build --configuration Release --no-restore
 
-#      - name: Run automated tests 🧪
-#        run: dotnet test -c Release --no-build
+      - name: Run automated tests 🧪
+        run: dotnet test -c Release --no-build
 
       - name: Publish app 📰
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
