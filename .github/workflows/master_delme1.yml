@@ -66,3 +66,9 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E3E20A8D72544865AD5E061EA57BEB59 }}
           package: .
+         
+      - name: Publish Artifacts 📦
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: webapp
+          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
