@@ -46,10 +46,10 @@ jobs:
           path: ${{env.DOTNET_ROOT}}/myapp
 
         - name: Publish Artifacts 📦
-        uses: actions/upload-artifact@v1.0.0
-        with:
-          name: webapp
-          path: ${{env.DOTNET_ROOT}}/myapp
+          uses: actions/upload-artifact@v1.0.0
+          with:
+            name: webapp
+            path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
     runs-on: windows-latest
